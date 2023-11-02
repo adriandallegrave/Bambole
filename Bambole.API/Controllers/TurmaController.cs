@@ -1,4 +1,7 @@
 ﻿using Bambole.API.Controllers.Base;
+using Bambole.Application.Dtos;
+using Bambole.Application.Interfaces;
+using Bambole.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,13 +32,13 @@ public class TurmaController : BaseController
     }
 
     [HttpGet("GetById")]
-    public async Task<ActionResult<Turma>> GetById(Guid guid)
+    public async Task<ActionResult<Turma>> GetById(Guid id)
     {
         _logger.LogWarning("Entry at GetById - Turma");
 
         try
         {
-            var result = await _turmaAppService.GetById(guid);
+            var result = await _turmaAppService.GetById(id);
 
             return ResponseGet(result);
         }

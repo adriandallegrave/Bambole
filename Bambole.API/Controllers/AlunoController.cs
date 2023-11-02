@@ -1,6 +1,10 @@
 ﻿using Bambole.API.Controllers.Base;
+using Bambole.Application.Dtos;
+using Bambole.Application.Interfaces;
+using Bambole.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace Bambole.API.Controllers;
 
@@ -29,13 +33,13 @@ public class AlunoController : BaseController
     }
 
     [HttpGet("GetById")]
-    public async Task<ActionResult<Aluno>> GetById(Guid guid)
+    public async Task<ActionResult<Aluno>> GetById(Guid id)
     {
         _logger.LogWarning("Entry at GetById - Aluno");
 
         try
         {
-            var result = await _alunoAppService.GetById(guid);
+            var result = await _alunoAppService.GetById(id);
 
             return ResponseGet(result);
         }

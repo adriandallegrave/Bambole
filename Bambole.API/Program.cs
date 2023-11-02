@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Bambole.Injection;
 using Bambole.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<BamboleContext>(options =>
 {
-    options.UseSqlServer(defaultConnection);
+    options.UseInMemoryDatabase(defaultConnection);
     options.LogTo(Console.WriteLine, LogLevel.Warning);
     options.EnableSensitiveDataLogging(false);
 });
@@ -37,7 +38,6 @@ app.UseForwardedHeaders();
 app.MapControllers();
 
 app.UseHttpsRedirection();
-app.MapRazorPages();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();

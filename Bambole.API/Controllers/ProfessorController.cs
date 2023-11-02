@@ -1,6 +1,9 @@
 ﻿using Bambole.API.Controllers.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Bambole.Application.Dtos;
+using Bambole.Application.Interfaces;
+using Bambole.Domain.Models;
 
 namespace Bambole.API.Controllers;
 
@@ -29,13 +32,13 @@ public class ProfessorController : BaseController
     }
 
     [HttpGet("GetById")]
-    public async Task<ActionResult<Professor>> GetById(Guid guid)
+    public async Task<ActionResult<Professor>> GetById(Guid id)
     {
         _logger.LogWarning("Entry at GetById - Professor");
 
         try
         {
-            var result = await _professorAppService.GetById(guid);
+            var result = await _professorAppService.GetById(id);
 
             return ResponseGet(result);
         }
